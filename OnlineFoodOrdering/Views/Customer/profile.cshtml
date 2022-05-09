@@ -1,0 +1,62 @@
+﻿
+@using OnlineFoodOrdering.Models
+
+@{
+    ViewBag.Title = "profile";
+}
+
+<br />
+<br />
+<br />
+
+<div class='container-fluid mx-auto mt-5 mb-5 col-12' style="text-align: center">
+
+    <div class="hd">Welcome back  @((Session["customer"] as Customer).userName) !</div>
+        <p><small class="text-muted">Always render more and better service than <br />
+            is expected of you, no matter what your ask may be.</small></p>
+
+        <br />
+
+        <div class="row" style="justify-content: center">
+
+            <!--Place an order-->
+            <div class="card col-md-4 col-12">
+                <img class="img" src="~/images/ProfilePageImages/orderNow.jpg" />
+                <br /><br />
+                <div>Place an order</div>
+                <br />
+                <div>
+                    <button class="btn btn-success">
+                   @Html.ActionLink("Order Now!","FoodItemsList", "FoodItem")                   
+                    </button>
+                </div>
+            </div>
+
+            <!--view cart details-->
+            <div class="card col-md-4 col-12">
+                <img class="img" src="~/images/ProfilePageImages/cart.jpg" />
+                <br /><br />
+                <div>View My Cart</div>
+                <br />
+                <div>
+                    <button class="btn btn-warning">
+                        @Html.ActionLink("my Cart","ShowShoppingCart", "ShoppingCart", new { shoppingCartId = (Session["customer"] as Customer).id }, null)
+                    </button>
+                </div>
+            </div>
+
+            <!--track order-->
+            <div class="card col-md-4 col-12">
+                <img class="img" src="~/images/ProfilePageImages/trackOrder.png" />
+                <br /><br />
+                <div>view order status</div>
+                <br />
+                <div>
+                    <button class="btn btn-primary">track order</button>
+                </div>
+            </div>
+
+
+        </div>
+
+    </div>
