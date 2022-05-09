@@ -1,0 +1,61 @@
+﻿
+@{
+    ViewBag.Title = "FoodItemsList";
+}
+
+@model System.Collections.Generic.List<OnlineFoodOrdering.Models.FoodItem>
+
+@using OnlineFoodOrdering.Models
+<h2>FoodItemsList</h2>
+
+
+<h2>
+    @((Session["customer"] as Customer).userName)
+</h2>
+
+
+
+<div class="container">
+
+    @foreach (var fooditem in Model)
+    {
+        <!-- product -->
+        <div class="col-xs-12 col-md-6 ">
+            <div>
+                <div class="row">
+                    <div class="col-md-5 col-sm-12 col-xs-12">
+                        <div class="product-image">
+                            <img src="https://via.placeholder.com/194x228/48D1CC" alt="194x228" class="img-responsive">
+                            <br />
+                        </div>
+                    </div>
+                    <div class="col-md-7 col-sm-12 col-xs-12">
+
+                        <div class="product-deatails">
+                            <h3 class="font-weight-bold foodName"> @fooditem.name </h3>
+                            <h6> Category Name Title Here</h6>
+                            <h3> <span>$ @fooditem.price</span> </h3>
+                        </div>
+
+                        <div class="description">
+                            <p>this is a small description</p>
+                        </div>
+
+                        <div class="product-info">
+                            <div class="row">
+                                <div class="col-md-6 col-sm-6 col-xs-6">
+                                    <button type="button" class="btn btn-success">
+                                        @Html.ActionLink("add to cart", "CartItemDetails", "CartItem", new { foodItemId = @fooditem.id }, null)
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- end product -->
+    }
+
+</div>

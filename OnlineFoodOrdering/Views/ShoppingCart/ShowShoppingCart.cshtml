@@ -1,0 +1,190 @@
+﻿
+@{
+    ViewBag.Title = "ShowShoppingCart";
+}
+@model OnlineFoodOrdering.ViewModels.ShopingCartAndCartItemsViewModel
+
+<br />
+<br />
+<br />
+<br />
+
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col"></th> <!--Place food image here -->
+            <th scope="col">Food Item Name</th>
+            <th scope="col">Food Item Price</th>
+            <th scope="col">Quantity</th>
+            <th scope="col">Total Price</th>
+            <th scope="col"></th>
+            <th scope="col"></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var fooditem in Model.cartItems)
+        {
+
+        <tr>
+            <th scope="row">.</th>
+            <th>@fooditem.foodItem.name</th>
+            <td class="lprice">@fooditem.foodItem.price</td>
+            <td class="lqty">@fooditem.quantity</td>
+            <td class="ltotal">@fooditem.totalPrice</td>
+            <td>
+                <button class="btn btn-danger"
+                        data-foodItemId=@fooditem.foodItem.id
+                        data-shoppingCartId=@fooditem.shoppingCart.id>
+                    Remove item
+                </button>
+            </td>
+
+            <td>
+                <button class="btn btn-success"
+                        data-foodItemId=@fooditem.foodItem.id
+                        data-shoppingCartId=@fooditem.shoppingCart.id
+                        data-quantity=@fooditem.shoppingCart.quantity>
+                    Add item
+                </button>
+            </td>
+        </tr>
+        }
+
+    </tbody>
+</table>
+
+<h2 >Total Quantity : 
+    <span class="gqty">
+        @Model.shoppingCart.quantity
+    </span>
+    </h2>
+<h2 >
+    Total Price :
+    <span class="gtotal">
+        @Model.shoppingCart.totalPrice
+    </span>
+</h2>
+
+
+
+
+
+@section scripts{
+
+    @Scripts.Render("~/bundles/jquery")
+
+    <script>
+
+
+    $(document).ready(function () {
+
+
+        $(document).ready(function () {
+
+            var localQty;
+            var localPrice;
+            var localTotalPrice;
+            
+            var globalQty = $(".gqty");
+            var globalPrice = $(".gtotal");
+
+            //add
+            $('.btn-success').click(function () {
+                var button = $(this)
+
+                localQty = (button.parent()).siblings(".lqty");
+                localPrice = (button.parent()).siblings(".lprice");
+                localTotalPrice = (button.parent()).siblings(".ltotal");
+
+
+                $.ajax({
+                    type: "POST",
+                    url: "/CartItem/AddCartItem",
+                    data: {
+                        cartId: button.attr("data-shoppingCartId"),
+                        foodItemId: button.attr("data-foodItemId"),
+                        quantity: 1
+                    },
+                    success: function () {
+
+                        localQty.text(parseFloat(localQty.text()) + parseFloat(1));
+                        localTotalPrice.text(parseFloat(localTotalPrice.text()) + parseFloat(localPrice.text()));
+
+                        globalQty.text(parseFloat(globalQty.text()) + parseFloat(1));
+                        globalPrice.text(parseFloat(globalPrice.text()) + parseFloat(localPrice.text()));
+                    
+                        },
+
+                    failure: function () {
+
+                        alert("failed")
+
+                    },
+
+                    error: function () {
+
+                        alert("error")
+                    }
+
+                })
+
+
+            });
+
+            //remove
+            $('.btn-danger').click(function () {
+                var button = $(this)
+
+                localQty = (button.parent()).siblings(".lqty");
+                localPrice = (button.parent()).siblings(".lprice");
+                localTotalPrice = (button.parent()).siblings(".ltotal");
+
+
+                $.ajax({
+                    type: "POST",
+                    url: "/CartItem/RemoveCartItem",
+                    data: {
+                        cartId: button.attr("data-shoppingCartId"),
+                        foodItemId: button.attr("data-foodItemId"),
+                        quantity: 1
+           
+                    },
+                    success: function () {
+
+                        localQty.text(parseFloat(localQty.text()) - parseFloat(1));
+                        localTotalPrice.text(parseFloat(localTotalPrice.text()) - parseFloat(localPrice.text()));
+
+                        if (localQty.text() <= 0) {
+                         button.parents("tr").remove()
+                           }
+
+                        globalQty.text(parseFloat(globalQty.text()) - parseFloat(1));
+                        globalPrice.text(parseFloat(globalPrice.text()) - parseFloat(localPrice.text()));
+
+                       
+                    },
+
+                    failure: function () {
+
+                        alert("failed")
+
+                    },
+
+                    error: function () {
+
+                        alert("error")
+                    }
+
+                })
+
+
+            });
+
+        });
+
+    });
+    </script>
+
+
+
+}

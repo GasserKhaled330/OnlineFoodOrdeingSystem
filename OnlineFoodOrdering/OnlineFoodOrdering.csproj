@@ -1,5 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="15.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\packages\EntityFramework.6.4.4\build\EntityFramework.props" Condition="Exists('..\packages\EntityFramework.6.4.4\build\EntityFramework.props')" />
   <Import Project="..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.0\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props" Condition="Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.0\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" />
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
@@ -45,6 +46,12 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.4.4\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.4.4\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -120,11 +127,48 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\CartItemController.cs" />
+    <Compile Include="Controllers\CustomerController.cs" />
+    <Compile Include="Controllers\FoodItemController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\ShoppingCartController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Interfaces\Ipayement.cs" />
+    <Compile Include="Interfaces\Istatus.cs" />
+    <Compile Include="Migrations\202205051034334_CreatingCustomersAndFoodItems.cs" />
+    <Compile Include="Migrations\202205051034334_CreatingCustomersAndFoodItems.designer.cs">
+      <DependentUpon>202205051034334_CreatingCustomersAndFoodItems.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202205051047592_1to1Rel_Cust_ShopingCart.cs" />
+    <Compile Include="Migrations\202205051047592_1to1Rel_Cust_ShopingCart.designer.cs">
+      <DependentUpon>202205051047592_1to1Rel_Cust_ShopingCart.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202205051051549_1to1Rel_Cust_Address.cs" />
+    <Compile Include="Migrations\202205051051549_1to1Rel_Cust_Address.designer.cs">
+      <DependentUpon>202205051051549_1to1Rel_Cust_Address.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202205051059438_MtoMRel_ShoppingCart__cartitem__Fooditem.cs" />
+    <Compile Include="Migrations\202205051059438_MtoMRel_ShoppingCart__cartitem__Fooditem.designer.cs">
+      <DependentUpon>202205051059438_MtoMRel_ShoppingCart__cartitem__Fooditem.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202205051911185_AddingQuantity_TotalPriceToCartItem.cs" />
+    <Compile Include="Migrations\202205051911185_AddingQuantity_TotalPriceToCartItem.designer.cs">
+      <DependentUpon>202205051911185_AddingQuantity_TotalPriceToCartItem.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Models\Address.cs" />
+    <Compile Include="Models\CartItem.cs" />
+    <Compile Include="Models\Category.cs" />
+    <Compile Include="Models\Customer.cs" />
+    <Compile Include="Models\DataBase\ApplicationDbContext.cs" />
+    <Compile Include="Models\FoodItem.cs" />
+    <Compile Include="Models\Order.cs" />
+    <Compile Include="Models\ShoppingCart.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\DatabaseServices.cs" />
+    <Compile Include="ViewModels\ShopingCartAndCartItemsViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap-theme.css" />
@@ -135,6 +179,9 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="images\ProfilePageImages\cart.jpg" />
+    <Content Include="images\ProfilePageImages\orderNow.jpg" />
+    <Content Include="images\ProfilePageImages\trackOrder.png" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
@@ -162,10 +209,14 @@
     <Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Customer\Login.cshtml" />
+    <Content Include="Views\Customer\profile.cshtml" />
+    <Content Include="Views\FoodItem\FoodItemsList.cshtml" />
+    <Content Include="Views\CartItem\CartItemDetails.cshtml" />
+    <Content Include="Views\ShoppingCart\ShowShoppingCart.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
@@ -179,6 +230,23 @@
     <None Include="packages.config" />
     <Content Include="Scripts\jquery-3.3.1.slim.min.map" />
     <Content Include="Scripts\jquery-3.3.1.min.map" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\202205051034334_CreatingCustomersAndFoodItems.resx">
+      <DependentUpon>202205051034334_CreatingCustomersAndFoodItems.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202205051047592_1to1Rel_Cust_ShopingCart.resx">
+      <DependentUpon>202205051047592_1to1Rel_Cust_ShopingCart.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202205051051549_1to1Rel_Cust_Address.resx">
+      <DependentUpon>202205051051549_1to1Rel_Cust_Address.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202205051059438_MtoMRel_ShoppingCart__cartitem__Fooditem.resx">
+      <DependentUpon>202205051059438_MtoMRel_ShoppingCart__cartitem__Fooditem.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202205051911185_AddingQuantity_TotalPriceToCartItem.resx">
+      <DependentUpon>202205051911185_AddingQuantity_TotalPriceToCartItem.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
@@ -213,7 +281,10 @@
       <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
     </PropertyGroup>
     <Error Condition="!Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.0\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.0\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props'))" />
+    <Error Condition="!Exists('..\packages\EntityFramework.6.4.4\build\EntityFramework.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\EntityFramework.6.4.4\build\EntityFramework.props'))" />
+    <Error Condition="!Exists('..\packages\EntityFramework.6.4.4\build\EntityFramework.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\EntityFramework.6.4.4\build\EntityFramework.targets'))" />
   </Target>
+  <Import Project="..\packages\EntityFramework.6.4.4\build\EntityFramework.targets" Condition="Exists('..\packages\EntityFramework.6.4.4\build\EntityFramework.targets')" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">
