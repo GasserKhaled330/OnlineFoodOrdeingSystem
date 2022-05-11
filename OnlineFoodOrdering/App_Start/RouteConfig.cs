@@ -13,11 +13,42 @@ namespace OnlineFoodOrdering
         {
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
+            routes.MapRoute(null, "",
+                    new
+                    {
+                        controller = "FoodItem",
+                        action = "FoodItemsList",
+                        category = (string)null,
+                        page = 1
+                    }
+                    );
+            routes.MapRoute(null, "Page{page}",
+                 new
+                 {
+                     controller = "FoodItem",
+                     action = "FoodItemsList",
+                     category = (string)null
+                 },
+                new { page = @"\d+" }
+            );
+
+            routes.MapRoute(null,
+            "{category}",
+            new { controller = "FoodItem", action = "FoodItemsList", page = 1 }
+            );
+
+            routes.MapRoute(null,
+            "{category}/Page{page}",
+            new { controller = "FoodItem", action = "FoodItemsList" },
+            new { page = @"\d+" }
+            );
+
             routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",
-                defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }
+                defaults: new { controller = "FoodItem", action = "FoodItemsList", id = UrlParameter.Optional }
             );
+            routes.MapRoute(null, "{controller}/{action}");
         }
     }
 }
