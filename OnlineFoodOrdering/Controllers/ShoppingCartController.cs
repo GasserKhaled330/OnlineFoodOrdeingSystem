@@ -1,13 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
-using OnlineFoodOrdering.Models.DataBase;
-using System.Data.Entity;
+﻿using System.Web.Mvc;
 using OnlineFoodOrdering.ViewModels;
 using OnlineFoodOrdering.Services;
-using OnlineFoodOrdering.Models;
 
 namespace OnlineFoodOrdering.Controllers
 {

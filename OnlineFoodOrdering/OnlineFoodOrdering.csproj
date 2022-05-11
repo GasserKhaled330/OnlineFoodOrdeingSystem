@@ -165,10 +165,6 @@
     <Compile Include="Models\Entity\Enums.cs" />
     <Compile Include="Models\Infrastructure\ApplicationDbContext.cs" />
     <Compile Include="Models\Entity\Entities\FoodItem\FoodItem.cs" />
-    <Compile Include="Models\Infrastructure\IRepository.cs" />
-    <Compile Include="Models\Infrastructure\IUnitOfWork.cs" />
-    <Compile Include="Models\Infrastructure\Repository.cs" />
-    <Compile Include="Models\Infrastructure\UnitOfWork.cs" />
     <Compile Include="Models\Entity\Entities\Order\Order.cs" />
     <Compile Include="Models\Entity\Entities\Users\RoleMaster.cs" />
     <Compile Include="Models\Entity\Entities\ShoppingCart\ShoppingCart.cs" />

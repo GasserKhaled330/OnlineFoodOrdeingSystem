@@ -4,7 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using OnlineFoodOrdering.Models;
-using OnlineFoodOrdering.Models.DataBase;
+using OnlineFoodOrdering.Models.Infrastructure;
 using System.Data.Entity;
 
 namespace OnlineFoodOrdering.Services
@@ -41,7 +41,7 @@ namespace OnlineFoodOrdering.Services
         /*FETCHING BY IDS*/
         public Customer fetchCustumerById(int id)
         {
-            return _context.Customers.SingleOrDefault(c => c.id == id);
+            return _context.Customers.SingleOrDefault(c => c.customerId == id);
         }
 
         public ShoppingCart fetchShoppingCart(int shoppingCartId)
@@ -67,16 +67,16 @@ namespace OnlineFoodOrdering.Services
 
 
         /*USERID AND PASSWORD FETCHING*/
-        public Customer fetchCustumerByEmailAndPassword(string email, string password)
-        {
-            var dbCustomer = _context.Customers.
-                SingleOrDefault(c => c.email==email && c.password==password);
+        //public Customer fetchCustumerByEmailAndPassword(string email, string password)
+        //{
+        //    var dbCustomer = _context.Customers.
+        //        SingleOrDefault(c => c.==email && c.password==password);
 
-            if (dbCustomer == null)
-                return null;
-            else
-                return dbCustomer;
-        }
+        //    if (dbCustomer == null)
+        //        return null;
+        //    else
+        //        return dbCustomer;
+        //}
 
 
         /*ADDING TO DB*/

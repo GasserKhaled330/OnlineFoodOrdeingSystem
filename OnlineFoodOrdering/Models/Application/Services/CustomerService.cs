@@ -1,11 +1,7 @@
 ﻿using OnlineFoodOrdering.Models.Application.Services.Interfaces;
 using OnlineFoodOrdering.Models.Entity;
 using OnlineFoodOrdering.Models.Infrastructure;
-using OnlineFoodOrdering.ViewModels;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 
 namespace OnlineFoodOrdering.Models.Application.Services
 {
