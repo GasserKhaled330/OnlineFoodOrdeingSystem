@@ -148,7 +148,6 @@
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Address.cs" />
-    <Compile Include="Models\Application\SeedWork\BaseService.cs" />
     <Compile Include="Models\Application\Services\CustomerService.cs" />
     <Compile Include="Models\Application\Services\FoodItemService.cs" />
     <Compile Include="Models\Application\Services\FormsAuthProvider.cs" />
