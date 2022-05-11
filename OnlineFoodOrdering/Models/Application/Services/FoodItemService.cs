@@ -1,10 +1,6 @@
 ﻿using OnlineFoodOrdering.Models.Application.Interfaces;
-using OnlineFoodOrdering.Models.Application.SeedWork;
 using OnlineFoodOrdering.Models.Infrastructure;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 
 namespace OnlineFoodOrdering.Models.Application.Services
 {
