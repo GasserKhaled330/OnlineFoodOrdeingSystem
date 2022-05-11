@@ -7,13 +7,13 @@ namespace OnlineFoodOrdering.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.4.4")]
-    public sealed partial class CreatingCustomersAndFoodItems : IMigrationMetadata
+    public sealed partial class second : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(CreatingCustomersAndFoodItems));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(second));
         
         string IMigrationMetadata.Id
         {
-            get { return "202205051034334_CreatingCustomersAndFoodItems"; }
+            get { return "202205112052324_second"; }
         }
         
         string IMigrationMetadata.Source

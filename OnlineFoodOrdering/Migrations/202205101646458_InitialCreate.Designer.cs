@@ -7,13 +7,13 @@ namespace OnlineFoodOrdering.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.4.4")]
-    public sealed partial class MtoMRel_ShoppingCart__cartitem__Fooditem : IMigrationMetadata
+    public sealed partial class InitialCreate : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(MtoMRel_ShoppingCart__cartitem__Fooditem));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(InitialCreate));
         
         string IMigrationMetadata.Id
         {
-            get { return "202205051059438_MtoMRel_ShoppingCart__cartitem__Fooditem"; }
+            get { return "202205101646458_InitialCreate"; }
         }
         
         string IMigrationMetadata.Source
