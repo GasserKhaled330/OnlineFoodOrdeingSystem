@@ -1,7 +1,4 @@
-﻿@using OnlineFoodOrdering.Models
-
-
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
@@ -11,7 +8,7 @@
     @Scripts.Render("~/bundles/modernizr")
 </head>
 <body>
-    <div class="navbar navbar-inverse navbar-fixed-top">
+    <div class="navbar navbar-default navbar-fixed-top">
         <div class="container">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -20,44 +17,55 @@
                     <span class="icon-bar"></span>
                 </button>
 
-                @Html.ActionLink("Food Ordering System", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                <div>
+                    <a href="@Url.Action("FoodItemsList","FoodItem")">
+                        <img class="navbar-brand " src="~/images/hunter-logo.png" alt="Hunter" />
+                    </a>
+                </div>
             </div>
 
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
+                    <li>@Html.ActionLink("Home", "FoodItemsList", "FoodItem")</li>
 
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
 
-                    @if (Session["Customer"] != null)
+                    @if (User.IsInRole("Customer"))
                     {
-                        <li>@Html.ActionLink("Home", "profile", "Customer")</li>
+                        <li><a>Hello - @User.Identity.Name.Split('@')[0]</a></li>
+                        <li>@Html.ActionLink("Logout", "Logout", "Account")</li>  
+                    }
+                    else
+                    {
                         <li>
-                            @Html.ActionLink(" my cart", "ShowShoppingCart", "ShoppingCart",
-                            new { shoppingCartId = (Session["customer"] as Customer).id }, null)
+                            <a href="@Url.Action("Signup", "Account")">
+                                <span class="glyphicon glyphicon-user"></span> Sign Up
+                            </a>
+                        </li>
+                        <li>
+                            <a href="@Url.Action("Login", "Account")">
+                                <span class="glyphicon glyphicon-log-in"></span> Log In
+                            </a>
                         </li>
                     }
                 </ul>
-
-                @if (Session["Customer"] != null)
-                {<ul class="nav navbar-nav navbar-brand navbar-right">
-                         <li>
-                           Welcome @((Session["customer"] as Customer).userName) !
-                         </li>
-                 </ul>
-                }  
             </div>
         </div>
     </div>
 
-    <div class="container body-content">
+    <div id="main-menu">
         @RenderBody()
         <hr />
-        <footer>
-            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
-        </footer>
     </div>
+
+    <footer class="fixed-bottom text-center">
+        <p>&copy; @DateTime.Now.Year - Hunter</p>
+    </footer>
 
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)
+    <script src="~/Scripts/Site.js"></script>
 </body>
 </html>
