@@ -43,11 +43,11 @@ namespace OnlineFoodOrdering
             new { page = @"\d+" }
             );
 
-            routes.MapRoute(
-                name: "Default",
-                url: "{controller}/{action}/{id}",
-                defaults: new { controller = "FoodItem", action = "FoodItemsList", id = UrlParameter.Optional }
-            );
+            //routes.MapRoute(
+            //    name: "Default",
+            //    url: "{controller}/{action}/{id}",
+            //    defaults: new { controller = "FoodItem", action = "FoodItemsList", id = UrlParameter.Optional }
+            //);
             routes.MapRoute(null, "{controller}/{action}");
         }
     }

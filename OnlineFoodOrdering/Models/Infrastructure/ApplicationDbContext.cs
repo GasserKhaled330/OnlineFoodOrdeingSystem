@@ -31,6 +31,8 @@ namespace OnlineFoodOrdering.Models.Infrastructure
         public DbSet<CartItem> CartItems { get; set; }
         public DbSet<FoodItem> FoodItems { get; set; }
 
+        public DbSet<Category> Categories { get; set; }
+
         //public DbSet<Address> Address { get; set; }
         //DbSet<Order> orders { get; set; }
     }
