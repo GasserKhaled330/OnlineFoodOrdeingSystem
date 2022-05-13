@@ -12,6 +12,10 @@ namespace OnlineFoodOrdering.Models.Application.Services
             get { return _appDbContext.FoodItems; }
         }
 
+        public IEnumerable<Category> Categories
+        {
+            get { return _appDbContext.Categories; }
+        }
 
         public FoodItem DeleteProduct(int foodItemID)
         {
@@ -38,11 +42,17 @@ namespace OnlineFoodOrdering.Models.Application.Services
                     dbEntry.name = foodItem.name;
                     dbEntry.description = foodItem.description;
                     dbEntry.price = foodItem.price;
-                    //dbEntry.category = foodItem.category;
+                    dbEntry.CategoryId = foodItem.CategoryId;
                     dbEntry.ImageData = foodItem.ImageData;
                     dbEntry.ImageMimeType = foodItem.ImageMimeType;
                 }
             }
+            _appDbContext.SaveChanges();
+        }
+
+        public void SaveFoodCategory(Category category)
+        {
+            _appDbContext.Categories.Add(category);
             _appDbContext.SaveChanges();
         }
     }
