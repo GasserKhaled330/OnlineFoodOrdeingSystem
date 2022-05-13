@@ -1,0 +1,102 @@
+﻿@model OnlineFoodOrdering.Models.FoodItem
+
+@{
+    ViewBag.Title = "Admin: Edit" + @Model.name;
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    HtmlHelper.ClientValidationEnabled = false;
+    HtmlHelper.UnobtrusiveJavaScriptEnabled = false;
+}
+
+<div class="panel">
+    <div class="panel-heading">
+        <h3>Edit @Model.name</h3>
+    </div>
+    @using (Html.BeginForm("Edit", "Admin", FormMethod.Post, new { enctype = "multipart/form-data" }))
+    {
+        <div class="container">
+            <div class="panel-body">
+                @Html.HiddenFor(m => m.id)
+                @foreach (var property in ViewData.ModelMetadata.Properties)
+                {
+                    switch (property.PropertyName)
+                    {
+                        case "id":
+                        case "ImageData":
+                        case "ImageMimeType":
+                        case "cartItems":
+                        case "Category":
+                            // do nothing
+                            break;
+                        default:
+
+                <div class="form-group">
+                    <label>
+                        @(property.DisplayName ?? property.PropertyName)
+                    </label>
+                    @if (property.PropertyName == "description")
+                    {
+                        @Html.TextArea(property.PropertyName, null,
+                             new { @class = "form-control", rows = 5 })
+                    }
+                    else if (property.PropertyName == "CategoryId")
+                    {
+                         @Html.DropDownList(property.PropertyName, (ViewBag.CategoryNameDropList) as SelectList, "Select Category Name", htmlAttributes: new { @class = "form-control" })
+                    }
+                    else
+                    {
+                        @Html.TextBox(property.PropertyName, null,
+                         new { @class = "form-control" })
+                    }
+                    @Html.ValidationMessage(property.PropertyName, "", new { @class = "text-danger" })
+                </div>
+                            break;
+                    }
+                }
+
+                <div class="form-group">
+                    <div style="position:relative;">
+                        <label>Image</label>
+                        <a class='btn' href='javascript:;'>
+                            Choose File...
+                            <input type="file" name="Image" size="40"
+                                   style="  position:absolute;
+                                        z-index:2;
+                                        top:0;
+                                        left:0;
+                                        filter: alpha(opacity=0);
+                                        opacity:0;
+                                        background-color:transparent;
+                                        color:transparent;"
+                                   onchange='$("#upload-fileinfo").html($(this).val());'>
+                        </a>
+                        <span class='label label-info' id="upload-file-info">
+                        </span>
+                    </div>
+                    @if (Model.ImageData == null)
+                    {
+                        <div class="form-control-static">No Image</div>
+                    }
+                    else
+                    {
+                        <img class="img-thumbnail" width="128" height="128" src="@Url.Action("GetImage", "FoodItem", new { Model.id })" />
+                    }
+                </div>
+
+            </div>
+        </div>
+        <div class="panel-footer">
+            <input type="submit" value="Save" class="btn btn-primary" />
+            @Html.ActionLink("Cancel and return to List", "Index", null,
+                                new {@class = "btn btn-default"})
+        </div>
+    }
+</div>
+
+
+@*<div class="form-group">
+        @Html.LabelFor(model => model.CategoryId, "CategoryId", htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.DropDownList("CategoryId", new SelectList(ViewBag.CategoryNameDropList, "Id","Name"), "Select Category Name", htmlAttributes: new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.CategoryId, "", new { @class = "text-danger" })
+        </div>
+</div>*@

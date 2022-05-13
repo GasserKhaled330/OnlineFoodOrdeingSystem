@@ -1,0 +1,50 @@
+﻿@model OnlineFoodOrdering.Models.FoodItem
+
+
+<div class="col-md-4">
+    <div class="shop-product product-desc">
+        <a href="#" class="product-name">
+            <strong>@Model.name</strong>
+        </a>
+        <p></p>
+        <div class="frame">
+            @if (Model.ImageData != null)
+            {
+                <div style="margin-right: 10px">
+                    <img class="product-img img-responsive" width="75" height="75"
+                            src="@Url.Action("GetImage", "FoodItem", new { Model.id })" />
+                </div>
+            }
+        </div>
+        <div class="product-tagline-wrapper">
+            <span class="margin-top-md product-tagline">
+                @Model.description
+            </span>
+        </div>
+        <span class="price margin-top-sm">
+            @Model.price.ToString("c")
+        </span>
+
+
+        <div class="add-to-cart">
+            <div style="padding:10px 0px">
+                @using (Html.BeginForm("AddToCart", "Cart"))
+                {
+                <div class="">
+                    @Html.HiddenFor(x => x.id)
+                    @Html.Hidden("returnUrl", Request.Url.PathAndQuery)
+                    <input value="1" class="quantity form-control" type="number">
+                    <input type="submit" class="btn btn-primary glyphicon" value="&#xe116;" 
+                           title="Add To Cart"/>
+                </div>
+                }
+            </div>
+        </div>
+    </div>
+            
+</div>
+
+
+
+
+
