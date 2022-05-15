@@ -9,7 +9,7 @@ namespace OnlineFoodOrdering.Models
     public class Customer 
     {
         [Key]
-        public int customerId { get; set; }
+        public int CustomerId { get; set; }
         [Required]
         [StringLength(100, MinimumLength = 3)]
         [Display(Name = "First Name")]
@@ -21,10 +21,7 @@ namespace OnlineFoodOrdering.Models
         [Required]
         [Phone]
         [Display(Name = "Contact Number")]
-        public string contactNumber { get; set; }
-
-        
-        public ShoppingCart ShoppingCart { get; set; }
+        public string ContactNumber { get; set; }
 
     }
 }

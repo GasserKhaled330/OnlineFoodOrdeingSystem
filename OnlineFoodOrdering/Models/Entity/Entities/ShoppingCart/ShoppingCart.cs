@@ -1,4 +1,5 @@
-﻿using System;
+﻿using OnlineFoodOrdering.Models.Application.Interfaces;
+using OnlineFoodOrdering.Models.Application.Services;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -9,10 +10,45 @@ namespace OnlineFoodOrdering.Models
     public class ShoppingCart
     {
         [Key]
-        public int id { get; set; }
-        public int quantity { get; set; }
-        public double totalPrice { get; set; }
-        public Customer customer { get; set; }
-        public List<CartItem> cartItems { get; set; }
+        public int Id { get; set; }
+
+        public string CartCustomerUserName { get; set; }//which is will be equal to customer user name
+
+        IShoppingCartService cartService = new ShoppingCartService();
+
+        public double TotalPrice
+        {
+            get { return GetShoppingCartItems().Sum(c => c.Quantity * c.FoodItem.price); }
+        }
+        public int CartItemsCount
+        {
+            get { return GetShoppingCartItems().Count(); }
+        }
+
+        public List<CartItem> GetShoppingCartItems()
+        { 
+            return cartService.CartItems;
+        }
+
+        public List<ShoppingCart> GetShoppingCarts()
+        {
+            return cartService.GetshoppingCarts();
+        }
+
+        public void AddCartItem(FoodItem foodItem, int quantity)
+        {
+            cartService.AddItem(this,foodItem, quantity);
+        }
+
+        public void RemoveCartItem(FoodItem foodItem)
+        {
+            cartService.RemoveItem(foodItem);
+        }
+
+        public void MigrateShoppingCartToCurrentUser()
+        {
+            cartService.MigrateCart(this, HttpContext.Current.User.Identity.Name);
+        }
+        
     }
 }
