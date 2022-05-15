@@ -127,12 +127,12 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Binders\ShoppingCartModelBinder.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AdminController.cs" />
-    <Compile Include="Controllers\CartItemController.cs" />
+    <Compile Include="Controllers\ShoppingCartController.cs" />
     <Compile Include="Controllers\FoodItemController.cs" />
     <Compile Include="Controllers\NavController.cs" />
-    <Compile Include="Controllers\ShoppingCartController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -145,6 +145,10 @@
     <Compile Include="Migrations\202205112052324_second.designer.cs">
       <DependentUpon>202205112052324_second.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202205142321433_ShoppingCart.cs" />
+    <Compile Include="Migrations\202205142321433_ShoppingCart.designer.cs">
+      <DependentUpon>202205142321433_ShoppingCart.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Address.cs" />
     <Compile Include="Models\Application\Services\CustomerService.cs" />
@@ -155,7 +159,8 @@
     <Compile Include="Models\Application\Services\Interfaces\IFoodItemService.cs" />
     <Compile Include="Models\Application\Services\Interfaces\IOrderService.cs" />
     <Compile Include="Models\Application\Services\Interfaces\IPaymentService.cs" />
-    <Compile Include="Models\Application\Services\Interfaces\IShoppingCart.cs" />
+    <Compile Include="Models\Application\Services\Interfaces\IShoppingCartService.cs" />
+    <Compile Include="Models\Application\Services\ShoppingCartService.cs" />
     <Compile Include="Models\Application\ViewModels\FoodItemsListViewModel.cs" />
     <Compile Include="Models\Application\ViewModels\OrderRequestViewModel.cs" />
     <Compile Include="Models\Application\ViewModels\PagingInfo.cs" />
@@ -180,7 +185,6 @@
     <Compile Include="obj\Release\TemporaryGeneratedFile_E7A71F73-0F8D-4B9B-B56E-8E70B10BC5D3.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Models\Application\ViewModels\RegisterViewModel.cs" />
-    <Compile Include="Models\Application\ViewModels\ShopingCartAndCartItemsViewModel.cs" />
     <Compile Include="Models\Application\ViewModels\UserAccountViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -188,6 +192,7 @@
     <Content Include="App_Data\FoodOrdering_log.ldf">
       <DependentUpon>FoodOrdering.mdf</DependentUpon>
     </Content>
+<<<<<<< HEAD
     <Content Include="bin\Antlr3.Runtime.dll" />
     <Content Include="bin\Antlr3.Runtime.pdb" />
     <Content Include="bin\EntityFramework.dll" />
@@ -252,6 +257,10 @@
     <Content Include="bin\System.Web.WebPages.Razor.xml" />
     <Content Include="bin\System.Web.WebPages.xml" />
     <Content Include="bin\WebGrease.dll" />
+=======
+    <Content Include="bin\OnlineFoodOrdering.dll" />
+    <Content Include="bin\OnlineFoodOrdering.pdb" />
+>>>>>>> dbaa7e87c5dde631a2b0434327eb1c7f47ee3d28
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
@@ -276,6 +285,7 @@
     <Content Include="images\style-4.png" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+<<<<<<< HEAD
     <Content Include="bin\OnlineFoodOrdering.dll.config" />
     <Content Include="bin\roslyn\csc.exe.config" />
     <Content Include="bin\roslyn\csc.rsp" />
@@ -287,6 +297,8 @@
     <Content Include="bin\roslyn\vbc.exe.config" />
     <Content Include="bin\roslyn\vbc.rsp" />
     <Content Include="bin\roslyn\VBCSCompiler.exe.config" />
+=======
+>>>>>>> dbaa7e87c5dde631a2b0434327eb1c7f47ee3d28
     <Content Include="obj\Release\DesignTimeResolveAssemblyReferencesInput.cache" />
     <Content Include="obj\Release\OnlineFoodOrdering.csproj.CoreCompileInputs.cache" />
     <Content Include="obj\Release\OnlineFoodOrdering.csprojAssemblyReference.cache" />
@@ -313,14 +325,9 @@
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\Home\About.cshtml" />
-    <Content Include="Views\Home\Contact.cshtml" />
-    <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Customer\Login.cshtml" />
     <Content Include="Views\Customer\profile.cshtml" />
     <Content Include="Views\FoodItem\FoodItemsList.cshtml" />
-    <Content Include="Views\CartItem\CartItemDetails.cshtml" />
-    <Content Include="Views\ShoppingCart\ShowShoppingCart.cshtml" />
     <Content Include="Views\Account\Login.cshtml" />
     <Content Include="Views\Account\SignUp.cshtml" />
     <Content Include="Views\Admin\Index.cshtml" />
@@ -329,6 +336,8 @@
     <Content Include="Views\Admin\Edit.cshtml" />
     <Content Include="Views\Admin\CreateCategory.cshtml" />
     <Content Include="Views\Nav\FlexMenu.cshtml" />
+    <Content Include="Views\ShoppingCart\Index.cshtml" />
+    <Content Include="Views\ShoppingCart\CartSummary.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Migrations\202205101646458_InitialCreate.resx">
@@ -336,6 +345,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202205112052324_second.resx">
       <DependentUpon>202205112052324_second.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202205142321433_ShoppingCart.resx">
+      <DependentUpon>202205142321433_ShoppingCart.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
