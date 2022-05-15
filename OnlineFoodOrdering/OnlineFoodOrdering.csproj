@@ -192,7 +192,6 @@
     <Content Include="App_Data\FoodOrdering_log.ldf">
       <DependentUpon>FoodOrdering.mdf</DependentUpon>
     </Content>
-<<<<<<< HEAD
     <Content Include="bin\Antlr3.Runtime.dll" />
     <Content Include="bin\Antlr3.Runtime.pdb" />
     <Content Include="bin\EntityFramework.dll" />
@@ -257,10 +256,8 @@
     <Content Include="bin\System.Web.WebPages.Razor.xml" />
     <Content Include="bin\System.Web.WebPages.xml" />
     <Content Include="bin\WebGrease.dll" />
-=======
     <Content Include="bin\OnlineFoodOrdering.dll" />
     <Content Include="bin\OnlineFoodOrdering.pdb" />
->>>>>>> dbaa7e87c5dde631a2b0434327eb1c7f47ee3d28
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
@@ -285,7 +282,6 @@
     <Content Include="images\style-4.png" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
-<<<<<<< HEAD
     <Content Include="bin\OnlineFoodOrdering.dll.config" />
     <Content Include="bin\roslyn\csc.exe.config" />
     <Content Include="bin\roslyn\csc.rsp" />
@@ -297,8 +293,6 @@
     <Content Include="bin\roslyn\vbc.exe.config" />
     <Content Include="bin\roslyn\vbc.rsp" />
     <Content Include="bin\roslyn\VBCSCompiler.exe.config" />
-=======
->>>>>>> dbaa7e87c5dde631a2b0434327eb1c7f47ee3d28
     <Content Include="obj\Release\DesignTimeResolveAssemblyReferencesInput.cache" />
     <Content Include="obj\Release\OnlineFoodOrdering.csproj.CoreCompileInputs.cache" />
     <Content Include="obj\Release\OnlineFoodOrdering.csprojAssemblyReference.cache" />
