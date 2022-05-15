@@ -12,7 +12,7 @@ namespace OnlineFoodOrdering.Controllers
     public class AccountController : Controller
     {
         private ICustomerService customerService = new CustomerService();
-
+        
         UsersRoleProvider usersRoleProvider;
 
         IAuthProvider authProvider;
@@ -34,7 +34,7 @@ namespace OnlineFoodOrdering.Controllers
         }
 
         [HttpPost]
-        public ActionResult Login(UserAccountViewModel model, string returnUrl)
+        public ActionResult Login(UserAccountViewModel model,ShoppingCart shoppingCart, string returnUrl)
         {
             
             if (ModelState.IsValid)
@@ -47,6 +47,7 @@ namespace OnlineFoodOrdering.Controllers
                     }
                     else
                     {
+                        shoppingCart.MigrateShoppingCartToCurrentUser();
                         return Redirect(returnUrl ?? Url.Action("FoodItemsList", "FoodItem"));
                     }
                 }
@@ -73,10 +74,20 @@ namespace OnlineFoodOrdering.Controllers
         {
             if (ModelState.IsValid)
             {
-                customerService.SaveCustomer(registerCustomer.Customer);
-                customerService.SaveCustomerAccountAndAddingRole(registerCustomer.UserAccount);
+                if (customerService.IsCustomerAlreadyExist(registerCustomer.UserAccount))
+                {
+                    ViewBag.Message = "Email Already Registered. Please Try Again With Another Email";
+                    return View();
+                }
+                else
+                {
+                    customerService.SaveCustomer(registerCustomer.Customer);
+                    customerService.SaveCustomerAccountAndAddingRole(registerCustomer.UserAccount);
+                    return RedirectToAction("FoodItemsList","FoodItem");
+                }
+                
             }
-            return RedirectToAction("Login");
+            return View();
         }
 
         public ActionResult Logout()

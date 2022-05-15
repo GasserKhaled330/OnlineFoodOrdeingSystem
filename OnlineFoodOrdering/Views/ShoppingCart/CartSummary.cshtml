@@ -1,0 +1,20 @@
+﻿@model OnlineFoodOrdering.Models.ShoppingCart
+
+
+<div class="">
+    <a href="@Url.Action("Index","ShoppingCart")" title="My Cart">
+        <div class="btn btn-lg glyphicon glyphicon-shopping-cart">
+            <span class="label label-primary">
+                @if (Model.CartCustomerUserName == User.Identity.Name)
+                {
+                    @Model.CartItemsCount
+                }
+                else
+                {
+                    <span>0</span>
+                }
+
+            </span>
+        </div>
+    </a>
+</div>

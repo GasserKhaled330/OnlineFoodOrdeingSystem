@@ -28,14 +28,14 @@
 
         <div class="add-to-cart">
             <div style="padding:10px 0px">
-                @using (Html.BeginForm("AddToCart", "Cart"))
+                @using (Html.BeginForm("AddItem", "ShoppingCart"))
                 {
                 <div class="">
                     @Html.HiddenFor(x => x.id)
-                    @Html.Hidden("returnUrl", Request.Url.PathAndQuery)
+                    
                     <input value="1" class="quantity form-control" type="number">
-                    <input type="submit" class="btn btn-primary glyphicon" value="&#xe116;" 
-                           title="Add To Cart"/>
+                    <input type="submit" class="btn btn-primary glyphicon" value="&#xe116;"
+                           title="Add To Cart" />
                 </div>
                 }
             </div>
