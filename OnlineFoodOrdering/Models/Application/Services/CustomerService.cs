@@ -23,10 +23,11 @@ namespace OnlineFoodOrdering.Models.Application.Services
             get { return _appDbContext.UserAccounts; }
         }
 
+
         public void SaveCustomer(Customer customer)
         {
-            if(customer != null)
-            {
+            if (customer != null)
+            {       
                 _appDbContext.Customers.Add(customer);
                 _appDbContext.SaveChanges();
             }
@@ -52,6 +53,15 @@ namespace OnlineFoodOrdering.Models.Application.Services
             }
         }
 
-        
+        public bool IsCustomerAlreadyExist(UserAccount customerAccount)
+        {
+            var isExist = _appDbContext.UserAccounts
+                            .SqlQuery("SELECT UserName FROM UserAccounts Where UserName = @customerAccount.UserName");
+            if (isExist != null)
+            {
+                return true;
+            }
+            return false;
+        }
     }
 }

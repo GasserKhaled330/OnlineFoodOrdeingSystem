@@ -11,26 +11,27 @@ namespace OnlineFoodOrdering.Models.Infrastructure
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Customer>().HasOptional(c => c.ShoppingCart)
-                  .WithRequired(sc => sc.customer)
-                  .WillCascadeOnDelete(true);
+            //modelBuilder.Entity<Customer>().HasOptional(c => c.ShoppingCart)
+            //      .WithRequired(sc => sc.customer)
+            //      .WillCascadeOnDelete(true);
 
             //modelBuilder.Entity<Customer>().HasOptional(c => c.address)
             //     .WithRequired(a => a.customer)
             //     .WillCascadeOnDelete(true);
 
-            modelBuilder.Entity<CartItem>()
-                .HasKey(c => new { c.shoppingCartId, c.foodItemId });
+            //modelBuilder.Entity<CartItem>()
+            //    .HasKey(c => new { c.shoppingCartId, c.foodItemId });
         }
 
         public DbSet<Customer> Customers { get; set; }
         public DbSet<RoleMaster> RoleMasters { get; set; }
         public DbSet<UserRolesMapping> UserRolesMappings { get; set; }
         public DbSet<UserAccount> UserAccounts { get; set; }
-        public DbSet<ShoppingCart> ShoppingCarts { get; set; }
-        public DbSet<CartItem> CartItems { get; set; }
-        public DbSet<FoodItem> FoodItems { get; set; }
 
+        public DbSet<CartItem> CartItems { get; set; }
+        public DbSet<ShoppingCart> ShoppingCart { get; set; }
+
+        public DbSet<FoodItem> FoodItems { get; set; }
         public DbSet<Category> Categories { get; set; }
 
         //public DbSet<Address> Address { get; set; }

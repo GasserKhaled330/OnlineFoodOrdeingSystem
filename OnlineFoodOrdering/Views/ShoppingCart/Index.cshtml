@@ -1,0 +1,115 @@
+﻿@model OnlineFoodOrdering.Models.ShoppingCart
+
+@{
+    ViewBag.Title = "Your Cart";
+}
+
+@if (Model.GetShoppingCarts().Any(c => c.CartCustomerUserName == User.Identity.Name ) && Model.CartItemsCount > 0)
+{
+<div class="container" style="margin-top:50px;">
+    <div class="row">
+        <div class="col-sm-12 col-md-10 col-md-offset-1">
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th>Product</th>
+                        <th>Quantity</th>
+                        <th class="text-center">Price</th>
+                        <th class="text-center">Total</th>
+                        <th> </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model.GetShoppingCartItems())
+                    {
+                    <tr>
+                        <td class="col-md-6">
+                            <div class="media">
+                                <!--Start Food Item Image-->
+                                <a class="thumbnail pull-left" href="#">
+
+                                    @if (item.FoodItem.ImageData == null)
+                                    {
+                                        <div class="form-control-static">No Image</div>
+                                    }
+                                    else
+                                    {
+                                        <img class="media-object" width="100" height="100" src="@Url.Action("GetImage", "FoodItem", new { item.FoodItem.id })" />
+                                    }
+
+                                </a>
+                                <!--Start Food Item Name-->
+                                <div class="media-body">
+                                    <h4 class="media-heading text-primary" style="cursor:pointer; margin-left: 10px">
+                                        @item.FoodItem.name
+                                    </h4>
+                                </div>
+                                <!--end Food Item Name-->
+
+                                <!--end Food Item Image-->
+                            </div>
+                        </td>
+                        <td class="col-md-1 text-center">
+                            <strong>@item.Quantity</strong>
+                        </td>
+                        <!--Start Food Item Price-->
+                        <td class="col-md-1 text-center">
+                            <strong>@item.FoodItem.price</strong>
+                        </td>
+                        <!--end Food Item Price-->
+
+                        <!--Start Food Item Total Price -->
+                        <td class="col-md-1 text-center">
+                            <strong>@item.TotalPrice</strong>
+                        </td>
+                        <!--end Food Item Total Price -->
+                        <td class="col-md-1">
+                            @using (Html.BeginForm("RemoveItem", "ShoppingCart"))
+                            {
+                                @Html.Hidden("Id", item.FoodItem.id)
+
+                                <input class="btn btn-sm btn-danger glyphicon" type="submit" value="&#xe020;" title="Remove" />
+                            }
+                        </td>
+                    </tr>
+                    }
+                        <tr>
+                            <td>   </td>
+                            <td>   </td>
+                            <td>   </td>
+                            <td><h3>Total</h3></td>
+                            <td class="text-right"><h3><strong>@Model.TotalPrice</strong></h3></td>
+                        </tr>
+                        <tr>
+                            <td>   </td>
+                            <td>   </td>
+                            <td>   </td>
+                            <td>
+                                <button type="button" class="btn btn-default">
+                                    <span class="glyphicon glyphicon-shopping-cart"></span>                   
+                                    @Html.ActionLink("Continue Shopping", "FoodItemsList", "FoodItem")
+                                </button>
+                            </td>
+                            <td>
+                                <button type="button" class="btn btn-success">
+                                    Checkout 
+                                </button>
+                            </td>
+                        </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+}
+else
+{
+    <div class="text-center" style="margin:100px;">
+        <div >
+            <i class="glyphicon glyphicon-shopping-cart" style="font-size:75px;" aria-hidden="true"></i>
+        </div>
+
+        <div style="margin:40px;"><h4>Your shopping cart is empty.</h4></div>
+        <div style="margin:20px;"><a href="/"><b>Click here</b></a> to continue shopping</div>
+    </div>
+}

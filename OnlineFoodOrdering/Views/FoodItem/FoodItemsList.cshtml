@@ -19,8 +19,9 @@
     <h2 class="text-center">Our Food Menu List</h2>
     
     <div class="categories">
-        <span>Categories: </span>@Html.ActionLink("Show All", "FoodItemsList","FoodItem",
-new { @class = "btn btn-default " }) @Html.Action("Menu", "Nav")
+        <span>Categories: </span>
+        @Html.ActionLink("Show All", "FoodItemsList","FoodItem",new { @class = "btn btn-default " }) 
+        @Html.Action("Menu", "Nav")
     </div>
 
     <p class="margin-bottom-lg margin-top-md font-size-20">
