@@ -280,6 +280,9 @@
     <Content Include="images\ProfilePageImages\orderNow.jpg" />
     <Content Include="images\ProfilePageImages\trackOrder.png" />
     <Content Include="images\style-4.png" />
+    <Content Include="obj\Debug\OnlineFoodOrdering.csproj.FileListAbsolute.txt" />
+    <Content Include="obj\Debug\OnlineFoodOrdering.dll" />
+    <Content Include="obj\Debug\OnlineFoodOrdering.pdb" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="bin\OnlineFoodOrdering.dll.config" />
@@ -296,6 +299,11 @@
     <Content Include="obj\Release\DesignTimeResolveAssemblyReferencesInput.cache" />
     <Content Include="obj\Release\OnlineFoodOrdering.csproj.CoreCompileInputs.cache" />
     <Content Include="obj\Release\OnlineFoodOrdering.csprojAssemblyReference.cache" />
+    <Content Include="obj\Debug\DesignTimeResolveAssemblyReferencesInput.cache" />
+    <Content Include="obj\Debug\OnlineFoodOrdering.csproj.CopyComplete" />
+    <Content Include="obj\Debug\OnlineFoodOrdering.csproj.CoreCompileInputs.cache" />
+    <Content Include="obj\Debug\OnlineFoodOrdering.csproj.GenerateResource.cache" />
+    <Content Include="obj\Debug\OnlineFoodOrdering.csprojAssemblyReference.cache" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />
@@ -343,6 +351,9 @@
     <EmbeddedResource Include="Migrations\202205142321433_ShoppingCart.resx">
       <DependentUpon>202205142321433_ShoppingCart.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="obj\Debug\OnlineFoodOrdering.Migrations.InitialCreate.resources" />
+    <EmbeddedResource Include="obj\Debug\OnlineFoodOrdering.Migrations.second.resources" />
+    <EmbeddedResource Include="obj\Debug\OnlineFoodOrdering.Migrations.ShoppingCart.resources" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
@@ -357,7 +368,9 @@
     <Content Include="Scripts\jquery-3.3.1.slim.min.map" />
     <Content Include="Scripts\jquery-3.3.1.min.map" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="obj\Debug\TempPE\" />
+  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
