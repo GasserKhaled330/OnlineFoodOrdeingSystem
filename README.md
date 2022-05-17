@@ -27,4 +27,4 @@ and system have to modules **Admin** & **User**:
     - Saves a lot of time of customers because of online transactions.
     - Customer can keep track of their orders too.
 
-~/project execution.mp4
+./project execution.mp4
