@@ -12,8 +12,7 @@ namespace OnlineFoodOrdering.Models.Application.Services.Interfaces
     {
         IEnumerable<Customer> Customers { get; }
         IEnumerable<UserAccount> CustomerAccounts { get; }
-        void SaveCustomer(Customer customer);
-        void SaveCustomerAccountAndAddingRole(UserAccount customerAccount);
+        void SaveCustomer(RegisterViewModel customer);
         bool IsCustomerAlreadyExist(UserAccount customerAccount);
         CustomerOrdersViewModel GetCustomerOrders();
         CustomerAccountsViewModel GetAllUsers();
