@@ -42,7 +42,7 @@ namespace OnlineFoodOrdering.Models
             {
                 var userRoles = (from userAccounts in context.UserAccounts
                                  join roleMapping in context.UserRolesMappings
-                                 on userAccounts.ID equals roleMapping.userID
+                                 on userAccounts.Id equals roleMapping.userID
                                  join role in context.RoleMasters
                                  on roleMapping.roleID equals role.ID
                                  where userAccounts.UserName == username
@@ -58,7 +58,7 @@ namespace OnlineFoodOrdering.Models
             {
                 var userRoleId = (from userAccount in context.UserAccounts
                                  join roleMapping in context.UserRolesMappings
-                                 on userAccount.ID equals roleMapping.userID
+                                 on userAccount.Id equals roleMapping.userID
                                  join role in context.RoleMasters
                                  on roleMapping.roleID equals role.ID
                                  where userAccount.UserName == username

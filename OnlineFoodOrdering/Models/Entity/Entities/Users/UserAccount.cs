@@ -15,7 +15,7 @@ namespace OnlineFoodOrdering.Models
             this.UserRolesMappings = new HashSet<UserRolesMapping>();
         }
         [Key]
-        public int ID { get; set; }
+        public int Id { get; set; }
 
         [Display(Name = "Email")]
         [Required(ErrorMessage = "Email is required.")]

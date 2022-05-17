@@ -23,5 +23,8 @@ namespace OnlineFoodOrdering.Models
         [Display(Name = "Contact Number")]
         public string ContactNumber { get; set; }
 
+        public int UserId { get; set; }
+
+        public virtual UserAccount User { get; set; }
     }
 }

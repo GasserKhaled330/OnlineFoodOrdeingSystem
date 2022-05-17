@@ -33,6 +33,7 @@
 
                     @if (User.IsInRole("Customer"))
                     {
+                        <li>@Html.ActionLink("My Orders","MyOrders","Order")</li>
                         <li>@Html.Action("CartSummary","ShoppingCart")</li>
                         <li><a>Hello - @User.Identity.Name</a></li>
                         <li>@Html.ActionLink("Logout", "Logout", "Account")</li>

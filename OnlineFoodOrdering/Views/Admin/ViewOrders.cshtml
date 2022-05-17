@@ -1,0 +1,49 @@
+﻿@model OnlineFoodOrdering.Models.Application.ViewModels.CustomerOrdersViewModel
+
+@{
+    ViewBag.Title = "Admin: View Orders";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="container">
+    <h2 class="text-center bg-info">All Orders</h2>
+    <hr />
+
+    @foreach (var order in Model.Orders)
+    {
+        <div class="bg-info" style="margin-top:20px">
+            <div class="pull-left ">
+                <p>Order Status: @order.OrderStatus</p>
+                <p>Order TotalAmount: @order.OrderTotalAmount</p>
+                <p>Order Placed Date: @order.OrderPlacedDate</p>
+                <p>Order Location: @order.OrderAddress</p>
+            </div>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Product</th>
+                        <th>Quantity</th>
+                        <th>Price</th>
+                        <th>Total</th>
+                        <th> </th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    @foreach (var orderDetail in order.OrderFoodItems)
+                    {
+                        <tr>
+                            <td>@orderDetail.FoodItem.name</td>
+                            <td>@orderDetail.Quantity</td>
+                            <td>@orderDetail.FoodItem.price</td>
+                            <td>@orderDetail.TotalPrice</td>
+                            <td></td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    }
+
+</div>
+

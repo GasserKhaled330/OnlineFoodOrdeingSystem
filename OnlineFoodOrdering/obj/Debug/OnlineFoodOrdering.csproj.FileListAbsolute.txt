@@ -55,4 +55,10 @@ D:\source\OnlineFoodOrdeingSystem\OnlineFoodOrdering\obj\Debug\OnlineFoodOrderin
 D:\source\OnlineFoodOrdeingSystem\OnlineFoodOrdering\obj\Debug\OnlineFoodOrdering.Migrations.InitialCreate.resources
 D:\source\OnlineFoodOrdeingSystem\OnlineFoodOrdering\obj\Debug\OnlineFoodOrdering.Migrations.second.resources
 D:\source\OnlineFoodOrdeingSystem\OnlineFoodOrdering\obj\Debug\OnlineFoodOrdering.Migrations.ShoppingCart.resources
+D:\source\OnlineFoodOrdeingSystem\OnlineFoodOrdering\obj\Debug\OnlineFoodOrdering.Migrations.order.resources
+D:\source\OnlineFoodOrdeingSystem\OnlineFoodOrdering\obj\Debug\OnlineFoodOrdering.Migrations.orderAddress.resources
+D:\source\OnlineFoodOrdeingSystem\OnlineFoodOrdering\obj\Debug\OnlineFoodOrdering.Migrations.OrderUserId.resources
+D:\source\OnlineFoodOrdeingSystem\OnlineFoodOrdering\obj\Debug\OnlineFoodOrdering.Migrations.OrdercustId.resources
+D:\source\OnlineFoodOrdeingSystem\OnlineFoodOrdering\obj\Debug\OnlineFoodOrdering.Migrations.OrderItem.resources
+D:\source\OnlineFoodOrdeingSystem\OnlineFoodOrdering\obj\Debug\OnlineFoodOrdering.Migrations.CustomerAccount.resources
 D:\source\OnlineFoodOrdeingSystem\OnlineFoodOrdering\obj\Debug\OnlineFoodOrdering.csprojAssemblyReference.cache

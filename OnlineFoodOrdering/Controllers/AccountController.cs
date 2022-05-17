@@ -34,7 +34,7 @@ namespace OnlineFoodOrdering.Controllers
         }
 
         [HttpPost]
-        public ActionResult Login(UserAccountViewModel model,ShoppingCart shoppingCart, string returnUrl)
+        public ActionResult Login(ShoppingCart shoppingCart, UserAccountViewModel model, string returnUrl)
         {
             
             if (ModelState.IsValid)
@@ -47,7 +47,7 @@ namespace OnlineFoodOrdering.Controllers
                     }
                     else
                     {
-                        shoppingCart.MigrateShoppingCartToCurrentUser();
+                        shoppingCart.MigrateShoppingCartToCurrentUser(model.UserName);
                         return Redirect(returnUrl ?? Url.Action("FoodItemsList", "FoodItem"));
                     }
                 }

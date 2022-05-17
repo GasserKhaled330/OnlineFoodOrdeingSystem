@@ -130,6 +130,7 @@
     <Compile Include="Binders\ShoppingCartModelBinder.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AdminController.cs" />
+    <Compile Include="Controllers\OrderController.cs" />
     <Compile Include="Controllers\ShoppingCartController.cs" />
     <Compile Include="Controllers\FoodItemController.cs" />
     <Compile Include="Controllers\NavController.cs" />
@@ -149,8 +150,31 @@
     <Compile Include="Migrations\202205142321433_ShoppingCart.designer.cs">
       <DependentUpon>202205142321433_ShoppingCart.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202205171036191_order.cs" />
+    <Compile Include="Migrations\202205171036191_order.designer.cs">
+      <DependentUpon>202205171036191_order.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202205171041480_orderAddress.cs" />
+    <Compile Include="Migrations\202205171041480_orderAddress.designer.cs">
+      <DependentUpon>202205171041480_orderAddress.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202205171110070_OrderUserId.cs" />
+    <Compile Include="Migrations\202205171110070_OrderUserId.designer.cs">
+      <DependentUpon>202205171110070_OrderUserId.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202205171241216_OrdercustId.cs" />
+    <Compile Include="Migrations\202205171241216_OrdercustId.designer.cs">
+      <DependentUpon>202205171241216_OrdercustId.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202205171526057_OrderItem.cs" />
+    <Compile Include="Migrations\202205171526057_OrderItem.designer.cs">
+      <DependentUpon>202205171526057_OrderItem.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202205171637155_CustomerAccount.cs" />
+    <Compile Include="Migrations\202205171637155_CustomerAccount.designer.cs">
+      <DependentUpon>202205171637155_CustomerAccount.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
-    <Compile Include="Models\Address.cs" />
     <Compile Include="Models\Application\Services\CustomerService.cs" />
     <Compile Include="Models\Application\Services\FoodItemService.cs" />
     <Compile Include="Models\Application\Services\FormsAuthProvider.cs" />
@@ -160,10 +184,14 @@
     <Compile Include="Models\Application\Services\Interfaces\IOrderService.cs" />
     <Compile Include="Models\Application\Services\Interfaces\IPaymentService.cs" />
     <Compile Include="Models\Application\Services\Interfaces\IShoppingCartService.cs" />
+    <Compile Include="Models\Application\Services\OrderProcessor.cs" />
     <Compile Include="Models\Application\Services\ShoppingCartService.cs" />
+    <Compile Include="Models\Application\ViewModels\CustomerAccountsViewModel.cs" />
+    <Compile Include="Models\Application\ViewModels\CustomerOrdersViewModel.cs" />
     <Compile Include="Models\Application\ViewModels\FoodItemsListViewModel.cs" />
     <Compile Include="Models\Application\ViewModels\OrderRequestViewModel.cs" />
     <Compile Include="Models\Application\ViewModels\PagingInfo.cs" />
+    <Compile Include="Models\Entity\Entities\Order\OrderDetail.cs" />
     <Compile Include="Models\Entity\Entities\Payment\Interfaces\IPayment.cs" />
     <Compile Include="Models\Entity\Entities\ShoppingCart\CartItem.cs" />
     <Compile Include="Models\Entity\Entities\FoodItem\Category.cs" />
@@ -177,9 +205,6 @@
     <Compile Include="Models\Entity\Entities\Users\UserAccount.cs" />
     <Compile Include="Models\Entity\Entities\Users\UserRolesMapping.cs" />
     <Compile Include="Models\Entity\Entities\Users\UsersRoleProvider.cs" />
-    <Compile Include="obj\Debug\TemporaryGeneratedFile_036C0B5B-1481-4323-8D20-8F5ADCB23D92.cs" />
-    <Compile Include="obj\Debug\TemporaryGeneratedFile_5937a670-0e60-4077-877b-f7221da3dda1.cs" />
-    <Compile Include="obj\Debug\TemporaryGeneratedFile_E7A71F73-0F8D-4B9B-B56E-8E70B10BC5D3.cs" />
     <Compile Include="obj\Release\TemporaryGeneratedFile_036C0B5B-1481-4323-8D20-8F5ADCB23D92.cs" />
     <Compile Include="obj\Release\TemporaryGeneratedFile_5937a670-0e60-4077-877b-f7221da3dda1.cs" />
     <Compile Include="obj\Release\TemporaryGeneratedFile_E7A71F73-0F8D-4B9B-B56E-8E70B10BC5D3.cs" />
@@ -192,7 +217,18 @@
     <Content Include="App_Data\FoodOrdering_log.ldf">
       <DependentUpon>FoodOrdering.mdf</DependentUpon>
     </Content>
-    <Content Include="bin\Antlr3.Runtime.dll" />
+    <Content Include="bin\OnlineFoodOrdering.dll.config" />
+    <Content Include="bin\roslyn\csc.exe.config" />
+    <Content Include="bin\roslyn\csc.rsp" />
+    <Content Include="bin\roslyn\csi.exe.config" />
+    <Content Include="bin\roslyn\csi.rsp" />
+    <Content Include="bin\roslyn\Microsoft.CSharp.Core.targets" />
+    <Content Include="bin\roslyn\Microsoft.Managed.Core.targets" />
+    <Content Include="bin\roslyn\Microsoft.VisualBasic.Core.targets" />
+    <Content Include="bin\roslyn\vbc.exe.config" />
+    <Content Include="bin\roslyn\vbc.rsp" />
+    <Content Include="bin\roslyn\VBCSCompiler.exe.config" />
+    <!-- <Content Include="bin\Antlr3.Runtime.dll" />
     <Content Include="bin\Antlr3.Runtime.pdb" />
     <Content Include="bin\EntityFramework.dll" />
     <Content Include="bin\EntityFramework.SqlServer.dll" />
@@ -303,8 +339,83 @@
     <Content Include="obj\Debug\OnlineFoodOrdering.csproj.CopyComplete" />
     <Content Include="obj\Debug\OnlineFoodOrdering.csproj.CoreCompileInputs.cache" />
     <Content Include="obj\Debug\OnlineFoodOrdering.csproj.GenerateResource.cache" />
-    <Content Include="obj\Debug\OnlineFoodOrdering.csprojAssemblyReference.cache" />
+    <Content Include="obj\Debug\OnlineFoodOrdering.csprojAssemblyReference.cache" /> -->
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
+    <Content Include="bin\Antlr3.Runtime.dll" />
+    <Content Include="bin\EntityFramework.dll" />
+    <Content Include="bin\EntityFramework.SqlServer.dll" />
+    <Content Include="bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll" />
+    <Content Include="bin\Microsoft.Web.Infrastructure.dll" />
+    <Content Include="bin\Newtonsoft.Json.dll" />
+    <Content Include="bin\OnlineFoodOrdering.dll" />
+    <Content Include="bin\OnlineFoodOrdering.pdb" />
+    <Content Include="bin\roslyn\csc.exe" />
+    <Content Include="bin\roslyn\csi.exe" />
+    <Content Include="bin\roslyn\Microsoft.Build.Tasks.CodeAnalysis.dll" />
+    <Content Include="bin\roslyn\Microsoft.CodeAnalysis.CSharp.dll" />
+    <Content Include="bin\roslyn\Microsoft.CodeAnalysis.CSharp.Scripting.dll" />
+    <Content Include="bin\roslyn\Microsoft.CodeAnalysis.dll" />
+    <Content Include="bin\roslyn\Microsoft.CodeAnalysis.Scripting.dll" />
+    <Content Include="bin\roslyn\Microsoft.CodeAnalysis.VisualBasic.dll" />
+    <Content Include="bin\roslyn\Microsoft.DiaSymReader.Native.amd64.dll" />
+    <Content Include="bin\roslyn\Microsoft.DiaSymReader.Native.x86.dll" />
+    <Content Include="bin\roslyn\System.AppContext.dll" />
+    <Content Include="bin\roslyn\System.Collections.Immutable.dll" />
+    <Content Include="bin\roslyn\System.Console.dll" />
+    <Content Include="bin\roslyn\System.Diagnostics.FileVersionInfo.dll" />
+    <Content Include="bin\roslyn\System.Diagnostics.StackTrace.dll" />
+    <Content Include="bin\roslyn\System.IO.Compression.dll" />
+    <Content Include="bin\roslyn\System.IO.FileSystem.dll" />
+    <Content Include="bin\roslyn\System.IO.FileSystem.Primitives.dll" />
+    <Content Include="bin\roslyn\System.IO.Pipes.AccessControl.dll" />
+    <Content Include="bin\roslyn\System.IO.Pipes.dll" />
+    <Content Include="bin\roslyn\System.Reflection.Metadata.dll" />
+    <Content Include="bin\roslyn\System.Security.AccessControl.dll" />
+    <Content Include="bin\roslyn\System.Security.Claims.dll" />
+    <Content Include="bin\roslyn\System.Security.Cryptography.Algorithms.dll" />
+    <Content Include="bin\roslyn\System.Security.Cryptography.Encoding.dll" />
+    <Content Include="bin\roslyn\System.Security.Cryptography.Primitives.dll" />
+    <Content Include="bin\roslyn\System.Security.Cryptography.X509Certificates.dll" />
+    <Content Include="bin\roslyn\System.Security.Principal.Windows.dll" />
+    <Content Include="bin\roslyn\System.Text.Encoding.CodePages.dll" />
+    <Content Include="bin\roslyn\System.ValueTuple.dll" />
+    <Content Include="bin\roslyn\System.Xml.ReaderWriter.dll" />
+    <Content Include="bin\roslyn\System.Xml.XmlDocument.dll" />
+    <Content Include="bin\roslyn\System.Xml.XPath.dll" />
+    <Content Include="bin\roslyn\System.Xml.XPath.XDocument.dll" />
+    <Content Include="bin\roslyn\vbc.exe" />
+    <Content Include="bin\roslyn\VBCSCompiler.exe" />
+    <Content Include="bin\System.Web.Helpers.dll" />
+    <Content Include="bin\System.Web.Mvc.dll" />
+    <Content Include="bin\System.Web.Optimization.dll" />
+    <Content Include="bin\System.Web.Razor.dll" />
+    <Content Include="bin\System.Web.WebPages.Deployment.dll" />
+    <Content Include="bin\System.Web.WebPages.dll" />
+    <Content Include="bin\System.Web.WebPages.Razor.dll" />
+    <Content Include="bin\WebGrease.dll" />
+    <Content Include="Content\bootstrap-theme.css" />
+    <Content Include="Content\bootstrap-theme.min.css" />
+    <Content Include="Content\bootstrap.css" />
+    <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\main.css" />
+    <Content Include="Content\Site.css" />
+    <Content Include="favicon.ico" />
+    <Content Include="Global.asax" />
+    <Content Include="images\about-4.jpg" />
+    <Content Include="images\Background.jpg" />
+    <Content Include="images\dish-1.jpg" />
+    <Content Include="images\dish-2.jpg" />
+    <Content Include="images\dish-3.jpg" />
+    <Content Include="images\dish-4.jpg" />
+    <Content Include="images\dish-5.jpg" />
+    <Content Include="images\dish-6.jpg" />
+    <Content Include="images\hunter-logo.png" />
+    <Content Include="images\ProfilePageImages\cart.jpg" />
+    <Content Include="images\ProfilePageImages\orderNow.jpg" />
+    <Content Include="images\ProfilePageImages\trackOrder.png" />
+    <Content Include="images\style-4.png" />
+    <Content Include="Scripts\bootstrap.js" />
+    <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />
     <Content Include="Scripts\jquery-3.3.1.slim.js" />
@@ -327,8 +438,6 @@
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\Customer\Login.cshtml" />
-    <Content Include="Views\Customer\profile.cshtml" />
     <Content Include="Views\FoodItem\FoodItemsList.cshtml" />
     <Content Include="Views\Account\Login.cshtml" />
     <Content Include="Views\Account\SignUp.cshtml" />
@@ -340,6 +449,11 @@
     <Content Include="Views\Nav\FlexMenu.cshtml" />
     <Content Include="Views\ShoppingCart\Index.cshtml" />
     <Content Include="Views\ShoppingCart\CartSummary.cshtml" />
+    <Content Include="Views\Order\Checkout.cshtml" />
+    <Content Include="Views\Order\Completed.cshtml" />
+    <Content Include="Views\Order\MyOrders.cshtml" />
+    <Content Include="Views\Admin\ViewOrders.cshtml" />
+    <Content Include="Views\Admin\ViewUsers.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Migrations\202205101646458_InitialCreate.resx">
@@ -350,6 +464,24 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202205142321433_ShoppingCart.resx">
       <DependentUpon>202205142321433_ShoppingCart.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202205171036191_order.resx">
+      <DependentUpon>202205171036191_order.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202205171041480_orderAddress.resx">
+      <DependentUpon>202205171041480_orderAddress.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202205171110070_OrderUserId.resx">
+      <DependentUpon>202205171110070_OrderUserId.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202205171241216_OrdercustId.resx">
+      <DependentUpon>202205171241216_OrdercustId.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202205171526057_OrderItem.resx">
+      <DependentUpon>202205171526057_OrderItem.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202205171637155_CustomerAccount.resx">
+      <DependentUpon>202205171637155_CustomerAccount.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="obj\Debug\OnlineFoodOrdering.Migrations.InitialCreate.resources" />
     <EmbeddedResource Include="obj\Debug\OnlineFoodOrdering.Migrations.second.resources" />
