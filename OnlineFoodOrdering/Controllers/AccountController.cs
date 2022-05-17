@@ -81,8 +81,7 @@ namespace OnlineFoodOrdering.Controllers
                 }
                 else
                 {
-                    customerService.SaveCustomer(registerCustomer.Customer);
-                    customerService.SaveCustomerAccountAndAddingRole(registerCustomer.UserAccount);
+                    customerService.SaveCustomer(registerCustomer);
                     return RedirectToAction("FoodItemsList","FoodItem");
                 }
                 

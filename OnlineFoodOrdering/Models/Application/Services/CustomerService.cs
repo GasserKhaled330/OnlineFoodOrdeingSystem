@@ -28,41 +28,34 @@ namespace OnlineFoodOrdering.Models.Application.Services
             get { return _appDbContext.UserAccounts; }
         }
 
-
-        public void SaveCustomer(Customer customer)
+        public void SaveCustomer(RegisterViewModel customer)
         {
             if (customer != null)
-            {       
-                _appDbContext.Customers.Add(customer);
-                _appDbContext.SaveChanges();
-            }
-        }
-
-        public void SaveCustomerAccountAndAddingRole(UserAccount customerAccount)
-        {
-            
-            if (customerAccount != null)
             {
                 //Adding Customer Account
-                _appDbContext.UserAccounts.Add(customerAccount);
+                _appDbContext.UserAccounts.Add(customer.UserAccount);
                 _appDbContext.SaveChanges();
                 //Adding Role To Customer
                 UserRolesMapping userRolesMapping = new UserRolesMapping
                 {
-                    userID = customerAccount.Id,
+                    userID = customer.UserAccount.Id,
                     roleID = (int)Role.Customer
                 };
 
                 _appDbContext.UserRolesMappings.Add(userRolesMapping);
+                _appDbContext.SaveChanges();
+                customer.Customer.UserId = customer.UserAccount.Id;
+
+                _appDbContext.Customers.Add(customer.Customer);
                 _appDbContext.SaveChanges();
             }
         }
 
         public bool IsCustomerAlreadyExist(UserAccount customerAccount)
         {
-            var isExist = _appDbContext.UserAccounts
-                            .SqlQuery("SELECT UserName FROM UserAccounts Where UserName = @customerAccount.UserName");
-            if (isExist != null)
+            var isExist = _appDbContext.UserAccounts.Any(c => c.UserName == customerAccount.UserName);
+                            
+            if (isExist)
             {
                 return true;
             }
