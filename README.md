@@ -27,3 +27,7 @@ and system have to modules **Admin** & **User**:
     - Saves a lot of time of customers because of online transactions.
     - Customer can keep track of their orders too.
 
+
+
+https://user-images.githubusercontent.com/82672765/168910250-a2f61c9d-a270-4f7a-8a2f-05348d3decc5.mp4
+
