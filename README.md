@@ -27,4 +27,3 @@ and system have to modules **Admin** & **User**:
     - Saves a lot of time of customers because of online transactions.
     - Customer can keep track of their orders too.
 
-(https://github.com/GasserKhaled330/OnlineFoodOrdeingSystem/blob/main/project%20execution.mp4)
