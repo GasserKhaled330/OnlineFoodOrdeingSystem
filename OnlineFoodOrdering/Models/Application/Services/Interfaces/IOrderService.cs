@@ -5,12 +5,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace OnlineFoodOrdering.Models.Application.Interfaces
+namespace OnlineFoodOrdering.Models.Application.Services.Interfaces
 {
-    interface IOrderService
+    public interface IOrderService
     {
-        IEnumerable<Order> Orders { get; }
-        Order CreateOrder(OrderRequestViewModel orderInfo);
-        bool MarkOrderAsPaid(int orderId);
+        void ProcessOrder(ShoppingCart shoppingCart, OrderRequestViewModel orderDetails);
+        CustomerOrdersViewModel GetAllOrders();
     }
 }

@@ -13,6 +13,6 @@ namespace OnlineFoodOrdering.Models.Application.Interfaces
         void AddItem(ShoppingCart shoppingCart,FoodItem foodItem, int quantity);
         void RemoveItem(FoodItem foodItem);
         void MigrateCart(ShoppingCart shoppingCart,string userName);
-
+        void ClearShoppingCart(ShoppingCart shoppingCart);
     }
 }

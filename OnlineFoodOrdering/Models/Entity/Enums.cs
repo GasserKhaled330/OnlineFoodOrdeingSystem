@@ -10,10 +10,11 @@ namespace OnlineFoodOrdering.Models.Entity
         Admin = 1,
         Customer = 2
     }
+
     public enum OrderStatus
     {
-        Created = 1,
-        Paid = 2,
+        New = 1,
+        InProduction = 2,
         Shipped = 3,
     }
 }

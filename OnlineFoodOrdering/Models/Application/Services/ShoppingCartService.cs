@@ -1,9 +1,7 @@
 ﻿using OnlineFoodOrdering.Models.Application.Interfaces;
 using OnlineFoodOrdering.Models.Infrastructure;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 
 namespace OnlineFoodOrdering.Models.Application.Services
 {
@@ -68,11 +66,37 @@ namespace OnlineFoodOrdering.Models.Application.Services
         // be associated with their username
         public void MigrateCart(ShoppingCart shoppingCart,string userName)
         {
+            var isCustomerHaveCart = _appDbContext.ShoppingCart.Any(
+                c => c.CartCustomerUserName == userName);
+
+            if (isCustomerHaveCart)
+            {
+                var CustomerShoppingCarts = _appDbContext.ShoppingCart.Where(
+                c => c.CartCustomerUserName == userName).Single();
+
+                _appDbContext.ShoppingCart.Remove(CustomerShoppingCarts);
+
+                var CustomerShoppingCartItems = _appDbContext.CartItems.Where(
+                c => c.ShoppingCart.Id == shoppingCart.Id);
+
+                _appDbContext.CartItems.RemoveRange(CustomerShoppingCartItems);
+
+            }
+            
             shoppingCart.CartCustomerUserName = userName;
             _appDbContext.ShoppingCart.Add(shoppingCart);
             _appDbContext.SaveChanges();
         }
 
+        public void ClearShoppingCart(ShoppingCart shoppingCart)
+        {
+            var CartItems = _appDbContext.CartItems.Where(c => c.ShoppingCart.Id == shoppingCart.Id);
 
+            foreach(var cartItem in CartItems)
+            {
+                _appDbContext.CartItems.Remove(cartItem);
+            }
+            _appDbContext.SaveChanges();
+        }
     }
 }

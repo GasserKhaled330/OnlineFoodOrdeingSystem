@@ -27,7 +27,8 @@ namespace OnlineFoodOrdering.Models
 
         public List<CartItem> GetShoppingCartItems()
         { 
-            return cartService.CartItems;
+            return cartService.CartItems.Where(
+                c => c.ShoppingCart.Id == this.Id).ToList();
         }
 
         public List<ShoppingCart> GetShoppingCarts()
@@ -45,10 +46,14 @@ namespace OnlineFoodOrdering.Models
             cartService.RemoveItem(foodItem);
         }
 
-        public void MigrateShoppingCartToCurrentUser()
+        public void MigrateShoppingCartToCurrentUser(string userName)
         {
-            cartService.MigrateCart(this, HttpContext.Current.User.Identity.Name);
+            cartService.MigrateCart(this, userName);
         }
         
+        public void ClearShoppingCartItems()
+        {
+            cartService.ClearShoppingCart(this);
+        }
     }
 }
